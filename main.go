@@ -16,7 +16,7 @@ var (
 const baseImageName = "nicolaka/netshoot"
 
 func main() {
-	pflag.StringVar(&imageTag, "image-tag", "latest", "")
+	pflag.StringVarP(&imageTag, "image-tag", "t", "latest", "netshoot container image tag to use")
 	pflag.Parse()
 
 	fullImageName = baseImageName + ":" + imageTag
