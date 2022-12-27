@@ -11,12 +11,17 @@ import (
 var (
 	imageTag      string
 	fullImageName string
+	help          bool
 )
 
 const baseImageName = "nicolaka/netshoot"
 
 func main() {
 	pflag.StringVarP(&imageTag, "image-tag", "t", "latest", "netshoot container image tag to use")
+	pflag.BoolVarP(&help, "help", "h", false, "help for kubectl-netshoot")
+	pflag.Usage = func() {
+		cmd.GetRootCmd().Usage()
+	}
 	pflag.Parse()
 
 	fullImageName = baseImageName + ":" + imageTag
@@ -28,4 +33,5 @@ func main() {
 	}
 
 	cmd.Execute()
+	cmd.GetRootCmd().Usage()
 }
