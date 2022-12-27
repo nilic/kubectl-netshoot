@@ -38,6 +38,7 @@ func init() {
 		"host-network", false, "(applicable to \"run\" only) whether to spin up netshoot on the host's network namespace")
 	rootCmd.PersistentFlags().StringVar(&imageTag,
 		"image-tag", "latest", "netshoot container image tag to use")
+
 	kubeConfigFlags := genericclioptions.NewConfigFlags(true).WithDiscoveryBurst(350).WithDiscoveryQPS(50.0)
 	matchVersionKubeConfigFlags := kcmdutil.NewMatchVersionFlags(kubeConfigFlags)
 	f := kcmdutil.NewFactory(matchVersionKubeConfigFlags)
