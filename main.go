@@ -11,12 +11,17 @@ import (
 var (
 	imageTag      string
 	fullImageName string
+	hostNetwork   bool
 	help          bool
 )
 
-const baseImageName = "nicolaka/netshoot"
+const (
+	baseImageName       = "nicolaka/netshoot"
+	hostNetworkOverride = "{\"spec\": {\"hostNetwork\": true}}"
+)
 
 func main() {
+	pflag.BoolVar(&hostNetwork, "host-network", false, "(applicable to \"run\" only) whether to spin up netshoot on the host's network namespace")
 	pflag.StringVar(&imageTag, "image-tag", "latest", "netshoot container image tag to use")
 	pflag.BoolVarP(&help, "help", "h", false, "help for kubectl-netshoot")
 	pflag.Usage = func() {
@@ -27,11 +32,13 @@ func main() {
 	fullImageName = baseImageName + ":" + imageTag
 
 	for _, c := range cmd.GetRootCmd().Commands() {
-		if c.Name() == "run" || c.Name() == "debug" {
+		if c.Name() != "version" {
 			c.Flags().Set("image", fullImageName)
+			if c.Name() == "run" && hostNetwork {
+				c.Flags().Set("overrides", hostNetworkOverride)
+			}
 		}
 	}
 
 	cmd.Execute()
-	cmd.GetRootCmd().Usage()
 }
