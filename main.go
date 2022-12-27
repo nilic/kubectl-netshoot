@@ -17,7 +17,7 @@ var (
 const baseImageName = "nicolaka/netshoot"
 
 func main() {
-	pflag.StringVarP(&imageTag, "image-tag", "t", "latest", "netshoot container image tag to use")
+	pflag.StringVar(&imageTag, "image-tag", "latest", "netshoot container image tag to use")
 	pflag.BoolVarP(&help, "help", "h", false, "help for kubectl-netshoot")
 	pflag.Usage = func() {
 		cmd.GetRootCmd().Usage()
