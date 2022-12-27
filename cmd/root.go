@@ -14,7 +14,8 @@ import (
 )
 
 var (
-	ImageTag string
+	hostNetwork bool
+	imageTag    string
 
 	rootCmd = &cobra.Command{
 		Use:   "kubectl-netshoot",
@@ -33,7 +34,9 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVar(&ImageTag,
+	rootCmd.PersistentFlags().BoolVar(&hostNetwork,
+		"host-network", false, "(applicable to \"run\" only) whether to spin up netshoot on the host's network namespace")
+	rootCmd.PersistentFlags().StringVar(&imageTag,
 		"image-tag", "latest", "netshoot container image tag to use")
 	kubeConfigFlags := genericclioptions.NewConfigFlags(true).WithDiscoveryBurst(350).WithDiscoveryQPS(50.0)
 	matchVersionKubeConfigFlags := kcmdutil.NewMatchVersionFlags(kubeConfigFlags)
@@ -42,12 +45,14 @@ func init() {
 
 	debugCmd := debug.NewCmdDebug(f, ioStreams)
 	debugCmd.SetHelpTemplate("TODO: debug help")
+	debugCmd.Short = "Debug using an ephemeral container in an existing pod"
 	debugCmd.Flags().Set("stdin", "true")
 	debugCmd.Flags().Set("tty", "true")
 	rootCmd.AddCommand(debugCmd)
 
 	runCmd := run.NewCmdRun(f, ioStreams)
 	runCmd.SetHelpTemplate("TODO: run help")
+	runCmd.Short = "Run a throwaway pod for troubleshooting"
 	runCmd.Flags().Set("stdin", "true")
 	runCmd.Flags().Set("tty", "true")
 	runCmd.Flags().Set("rm", "true")
