@@ -34,7 +34,7 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&ImageTag,
-		"image-tag", "", "", "path to the kubeconfig file")
+		"image-tag", "", "latest", "path to the kubeconfig file")
 	kubeConfigFlags := genericclioptions.NewConfigFlags(true).WithDiscoveryBurst(350).WithDiscoveryQPS(50.0)
 	matchVersionKubeConfigFlags := kcmdutil.NewMatchVersionFlags(kubeConfigFlags)
 	f := kcmdutil.NewFactory(matchVersionKubeConfigFlags)

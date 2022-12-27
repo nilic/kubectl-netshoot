@@ -16,23 +16,16 @@ var (
 const baseImageName = "nicolaka/netshoot"
 
 func main() {
-	pflag.StringVar(&imageTag, "image-tag", "", "")
+	pflag.StringVar(&imageTag, "image-tag", "latest", "")
 	pflag.Parse()
 
-	// form full image name from base and tag
-	if imageTag != "" {
-		fullImageName = baseImageName + ":" + imageTag
-	} else {
-		fullImageName = baseImageName + ":latest"
-	}
+	fullImageName = baseImageName + ":" + imageTag
 
-	// set image for child commands
 	for _, c := range cmd.GetRootCmd().Commands() {
 		if c.Name() == "run" || c.Name() == "debug" {
 			c.Flags().Set("image", fullImageName)
 		}
 	}
 
-	// execute root command
 	cmd.Execute()
 }
