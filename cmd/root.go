@@ -14,6 +14,8 @@ import (
 )
 
 var (
+	ImageTag string
+
 	rootCmd = &cobra.Command{
 		Use:   "kubectl-netshoot",
 		Short: "kubectl plugin for spinning up netshoot container for network troubleshooting.",
@@ -31,6 +33,8 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.PersistentFlags().StringVarP(&ImageTag,
+		"image-tag", "", "", "path to the kubeconfig file")
 	kubeConfigFlags := genericclioptions.NewConfigFlags(true).WithDiscoveryBurst(350).WithDiscoveryQPS(50.0)
 	matchVersionKubeConfigFlags := kcmdutil.NewMatchVersionFlags(kubeConfigFlags)
 	f := kcmdutil.NewFactory(matchVersionKubeConfigFlags)
@@ -38,14 +42,12 @@ func init() {
 
 	debugCmd := debug.NewCmdDebug(f, ioStreams)
 	debugCmd.SetHelpTemplate("TODO: debug help")
-	debugCmd.Flags().Set("image", "nicolaka/netshoot")
 	debugCmd.Flags().Set("stdin", "true")
 	debugCmd.Flags().Set("tty", "true")
 	rootCmd.AddCommand(debugCmd)
 
 	runCmd := run.NewCmdRun(f, ioStreams)
 	runCmd.SetHelpTemplate("TODO: run help")
-	runCmd.Flags().Set("image", "nicolaka/netshoot")
 	runCmd.Flags().Set("stdin", "true")
 	runCmd.Flags().Set("tty", "true")
 	runCmd.Flags().Set("rm", "true")
@@ -54,4 +56,8 @@ func init() {
 	kubeConfigFlags.AddFlags(rootCmd.PersistentFlags())
 	matchVersionKubeConfigFlags.AddFlags(rootCmd.PersistentFlags())
 	rootCmd.PersistentFlags().AddGoFlagSet(flag.CommandLine)
+}
+
+func GetRootCmd() *cobra.Command {
+	return rootCmd
 }
