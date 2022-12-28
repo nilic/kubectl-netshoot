@@ -1,7 +1,9 @@
 package cmd
 
 const (
-	debugHelp = "TODO: debug help"
+	debugShort = "Debug using an ephemeral container in an existing pod"
+	debugHelp  = "TODO: debug help"
 
-	runHelp = "TODO: run help"
+	runShort = "Run a throwaway pod for troubleshooting"
+	runHelp  = "TODO: run help"
 )

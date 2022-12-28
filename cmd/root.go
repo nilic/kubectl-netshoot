@@ -46,14 +46,14 @@ func init() {
 
 	debugCmd := debug.NewCmdDebug(f, ioStreams)
 	debugCmd.SetHelpTemplate(debugHelp)
-	debugCmd.Short = "Debug using an ephemeral container in an existing pod"
+	debugCmd.Short = debugShort
 	debugCmd.Flags().Set("stdin", "true")
 	debugCmd.Flags().Set("tty", "true")
 	rootCmd.AddCommand(debugCmd)
 
 	runCmd := run.NewCmdRun(f, ioStreams)
 	runCmd.SetHelpTemplate(runHelp)
-	runCmd.Short = "Run a throwaway pod for troubleshooting"
+	runCmd.Short = runShort
 	runCmd.Flags().Set("stdin", "true")
 	runCmd.Flags().Set("tty", "true")
 	runCmd.Flags().Set("rm", "true")
