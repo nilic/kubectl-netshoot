@@ -13,6 +13,11 @@ import (
 	kcmdutil "k8s.io/kubectl/pkg/cmd/util"
 )
 
+const (
+	baseImageName       = "nicolaka/netshoot"
+	hostNetworkOverride = "{\"spec\": {\"hostNetwork\": true}}"
+)
+
 var (
 	hostNetwork bool
 	imageTag    string
@@ -21,15 +26,11 @@ var (
 		Use:   "kubectl-netshoot",
 		Short: "kubectl plugin for spinning up netshoot container for network troubleshooting.",
 		Long:  "kubectl plugin for spinning up netshoot container for network troubleshooting.",
+		PersistentPreRun: func(cmd *cobra.Command, args []string) {
+			setFlagsForChildCmds(cmd)
+		},
 	}
 )
-
-func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
-		log.Fatalf("error: %v\n", err)
-	}
-}
 
 func init() {
 	rootCmd.PersistentFlags().BoolVar(&hostNetwork,
@@ -62,6 +63,22 @@ func init() {
 	rootCmd.PersistentFlags().AddGoFlagSet(flag.CommandLine)
 }
 
-func GetRootCmd() *cobra.Command {
-	return rootCmd
+func setFlagsForChildCmds(cmd *cobra.Command) {
+	fullImageName := baseImageName + ":" + imageTag
+
+	if cmd.Name() == "run" || cmd.Name() == "debug" {
+		cmd.Flags().Set("image", fullImageName)
+	}
+
+	if cmd.Name() == "run" && hostNetwork {
+		cmd.Flags().Set("overrides", hostNetworkOverride)
+	}
+
+}
+
+func Execute() {
+	err := rootCmd.Execute()
+	if err != nil {
+		log.Fatalf("error: %v\n", err)
+	}
 }
