@@ -35,7 +35,7 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().BoolVar(&hostNetwork,
-		"host-network", false, "(applicable to \"run\" only) whether to spin up netshoot on the host's network namespace")
+		"host-network", false, "(applicable to \"run\" command only) whether to spin up netshoot on the host's network namespace")
 	rootCmd.PersistentFlags().StringVar(&imageTag,
 		"image-tag", "latest", "netshoot container image tag to use")
 
