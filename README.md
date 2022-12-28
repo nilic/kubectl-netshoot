@@ -1,5 +1,5 @@
 # kubectl netshoot 🌠
-A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for spinning up a [netshoot](https://github.com/nicolaka/netshoot) container. `netshoot` is a network troubleshooting swiss-army container which allows you to perform any troubleshooting without installing any new packages directly on the host or your application's package.
+A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for spinning up a [netshoot](https://github.com/nicolaka/netshoot) container. `netshoot` is a network troubleshooting swiss-army container which allows you to perform Kubernetes troubleshooting without installing any new packages in your containers or cluster nodes.
 
 ## Installation
 
@@ -9,7 +9,7 @@ Just download the binary for your OS and architecture from the [Releases](https:
 
 ```
 Usage:
-  kubectl-netshoot [command]
+  kubectl netshoot [command]
 
 Available Commands:
   completion  Generate the autocompletion script for the specified shell
@@ -62,4 +62,4 @@ $ kubectl netshoot run tmp-shell --image-tag v0.5
 $ kubectl netshoot run tmp-shell --host-network
 ```
 
-For more info on netshoot and provided tools please take a look at its [Github repo](https://github.com/nicolaka/netshoot).
+For more info on `netshoot` and provided tools please take a look at [nicolaka/netshoot](https://github.com/nicolaka/netshoot) Github repo.
