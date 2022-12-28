@@ -21,7 +21,7 @@ const (
 )
 
 func main() {
-	pflag.BoolVar(&hostNetwork, "host-network", false, "(applicable to \"run\" only) whether to spin up netshoot on the host's network namespace")
+	pflag.BoolVar(&hostNetwork, "host-network", false, "(applicable to \"run\" command only) whether to spin up netshoot on the host's network namespace")
 	pflag.StringVar(&imageTag, "image-tag", "latest", "netshoot container image tag to use")
 	pflag.BoolVarP(&help, "help", "h", false, "help for kubectl-netshoot")
 	pflag.Usage = func() {
