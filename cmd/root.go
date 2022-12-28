@@ -21,8 +21,6 @@ var (
 		Use:   "kubectl-netshoot",
 		Short: "kubectl plugin for spinning up netshoot container for network troubleshooting.",
 		Long:  "kubectl plugin for spinning up netshoot container for network troubleshooting.",
-		Run: func(cmd *cobra.Command, args []string) {
-		},
 	}
 )
 
