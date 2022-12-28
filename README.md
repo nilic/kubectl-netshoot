@@ -55,7 +55,7 @@ $ kubectl netshoot debug my-existing-pod --image-tag v0.5
 # spin up a throwaway pod for troubleshooting
 $ kubectl netshoot run tmp-shell
 
-# spin up a throaway pod with a specific netshoot image
+# spin up a throwaway pod with a specific netshoot image
 $ kubectl netshoot run tmp-shell --image-tag v0.5
 
 # spin up a netshoot pod on the host's network namespace
