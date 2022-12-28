@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"strings"
-	"unicode"
 )
 
 const (
@@ -18,7 +17,6 @@ Global Flags:
     --cluster string                 The name of the kubeconfig cluster to use
     --context string                 The name of the kubeconfig context to use
     --disable-compression            If true, opt-out of response compression for all requests to the server
--h, --help                           help for kubectl-netshoot
     --insecure-skip-tls-verify       If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
     --kubeconfig string              Path to the kubeconfig file to use for CLI requests.
     --match-server-version           Require server version to match client version
@@ -31,9 +29,10 @@ Global Flags:
 
 	debugFlags = `
 Flags:
-    --image-tag string               netshoot container image tag to use (default "latest")`
+    --image-tag string               netshoot container image tag to use (default "latest")
+-h, --help                           help for debug`
 
-	debugShort = "Debug using an ephemeral container in an existing pod or node"
+	debugShort = "Debug using an ephemeral container in an existing pod or on a node"
 
 	debugUsage = `
 Usage:
@@ -42,7 +41,8 @@ Usage:
 	runFlags = `
 Flags:
     --host-network                   (applicable to "run" command only) whether to spin up netshoot on the host's network namespace
-    --image-tag string               netshoot container image tag to use (default "latest")`
+    --image-tag string               netshoot container image tag to use (default "latest")
+-h, --help                           help for run`
 
 	runShort = "Run a throwaway pod for troubleshooting"
 
@@ -52,6 +52,6 @@ Usage:
 )
 
 var (
-	debugHelp = strings.TrimRightFunc(strings.Join([]string{debugShort, debugUsage, debugFlags, globalFlags}, "\n"), unicode.IsSpace)
+	debugHelp = strings.Join([]string{debugShort, debugUsage, debugFlags, globalFlags}, "\n")
 	runHelp   = strings.Join([]string{runShort, runUsage, runFlags, globalFlags}, "\n")
 )
