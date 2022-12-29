@@ -19,6 +19,15 @@ Available Commands:
   version     Print kubectl-netshoot version
 
 Flags:
+  -h, --help                           help for kubectl-netshoot
+      --host-network                   (applicable to "run" command only) whether to spin up netshoot on the host's network namespace
+      --image-tag string               netshoot container image tag to use (default "latest")
+```
+
+In addition to these flags, the following `kubectl` flags are available for all `kubectl netshoot` commands:
+
+```
+Flags:
       --as string                      Username to impersonate for the operation. User could be a regular user or a service account in a namespace.
       --as-group stringArray           Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
       --as-uid string                  UID to impersonate for the operation.
@@ -29,9 +38,6 @@ Flags:
       --cluster string                 The name of the kubeconfig cluster to use
       --context string                 The name of the kubeconfig context to use
       --disable-compression            If true, opt-out of response compression for all requests to the server
-  -h, --help                           help for kubectl-netshoot
-      --host-network                   (applicable to "run" command only) whether to spin up netshoot on the host's network namespace
-      --image-tag string               netshoot container image tag to use (default "latest")
       --insecure-skip-tls-verify       If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
       --kubeconfig string              Path to the kubeconfig file to use for CLI requests.
       --match-server-version           Require server version to match client version
