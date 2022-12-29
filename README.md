@@ -53,7 +53,7 @@ Flags:
 
 Each of the following commands will spin up a `netshoot` container with an interactive session and attach to it.
 
-`run` command is equivalent to `kubectl run --rm` meaning that the container will be deleted after you exit the session.
+`run` command is equivalent to `kubectl run --rm` meaning that the pod will be deleted after you exit the session.
 
 ```
 # spin up a throwaway pod for troubleshooting
