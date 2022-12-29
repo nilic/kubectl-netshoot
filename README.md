@@ -45,13 +45,11 @@ Flags:
 
 ## Examples
 
+Each of the following commands will spin up a `netshoot` container with an interactive session and attach to it.
+
+`run` command is equivalent to `kubectl run --rm` meaning that the container will be deleted after you exit the session.
+
 ```
-# debug using an ephemeral container in an existing pod
-$ kubectl netshoot debug my-existing-pod
-
-# debug with a specific netshoot image
-$ kubectl netshoot debug my-existing-pod --image-tag v0.5
-
 # spin up a throwaway pod for troubleshooting
 $ kubectl netshoot run tmp-shell
 
@@ -60,6 +58,20 @@ $ kubectl netshoot run tmp-shell --image-tag v0.5
 
 # spin up a netshoot pod on the host's network namespace
 $ kubectl netshoot run tmp-shell --host-network
+```
+
+`debug` command spins up netshoot as an [ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/) in an existing pod or on a node. Ephemeral container terminates after the interactive session is exited.
+
+```
+# debug using an ephemeral container in an existing pod
+$ kubectl netshoot debug my-existing-pod
+
+# debug with a specific netshoot image
+$ kubectl netshoot debug my-existing-pod --image-tag v0.5
+
+# create a debug session on a node
+# netshoot will run in the host namespaces and have host's filesystem mounted at /host
+$ kubectl netshoot debug node/my-node
 ```
 
 For more info on `netshoot` and provided tools please take a look at [nicolaka/netshoot](https://github.com/nicolaka/netshoot) Github repo.
