@@ -38,6 +38,21 @@ Flags:
 Usage:
     kubectl netshoot debug (POD | TYPE[[.VERSION].GROUP]/NAME) [flags] [ -- COMMAND [args...] ]`
 
+	debugExamples = `
+Examples:
+    # debug using an ephemeral container in an existing pod
+    kubectl netshoot debug my-existing-pod
+
+    # debug with a specific netshoot image
+    kubectl netshoot debug my-existing-pod --image-tag v0.5
+
+    # run a command in netshoot container instead of shell
+    kubectl netshoot debug mypod -- curl localhost:8443
+
+    # create a debug session on a node
+    # netshoot will run in the host namespaces and have host's filesystem mounted at /host
+    kubectl netshoot debug node/my-node`
+
 	runFlags = `
 Flags:
     --host-network                   (applicable to "run" command only) whether to spin up netshoot on the host's network namespace
@@ -49,9 +64,23 @@ Flags:
 	runUsage = `
 Usage:
     kubectl netshoot run NAME [flags] [ -- COMMAND [args...] ]`
+
+	runExamples = `
+Examples:
+    # spin up a throwaway pod for troubleshooting
+    kubectl netshoot run tmp-shell
+
+    # spin up a throwaway pod with a specific netshoot image
+    kubectl netshoot run tmp-shell --image-tag v0.5
+
+    # run a command in netshoot container instead of shell
+    kubectl netshoot run tmp-shell -- ping 8.8.8.8
+
+    # spin up a netshoot pod on the host's network namespace
+    kubectl netshoot run tmp-shell --host-network`
 )
 
 var (
-	debugHelp = strings.Join([]string{debugShort, debugUsage, debugFlags, globalFlags}, "\n")
-	runHelp   = strings.Join([]string{runShort, runUsage, runFlags, globalFlags}, "\n")
+	debugHelp = strings.Join([]string{debugShort, debugExamples, debugUsage, debugFlags, globalFlags}, "\n")
+	runHelp   = strings.Join([]string{runShort, runExamples, runUsage, runFlags, globalFlags}, "\n")
 )
