@@ -36,7 +36,7 @@ Flags:
 
 	debugUsage = `
 Usage:
-    kubectl netshoot debug (POD | TYPE[[.VERSION].GROUP]/NAME) [flags]`
+    kubectl netshoot debug (POD | TYPE[[.VERSION].GROUP]/NAME) [flags] [ -- COMMAND [args...] ]`
 
 	runFlags = `
 Flags:
@@ -48,7 +48,7 @@ Flags:
 
 	runUsage = `
 Usage:
-    kubectl netshoot run NAME [flags]`
+    kubectl netshoot run NAME [flags] [ -- COMMAND [args...] ]`
 )
 
 var (
