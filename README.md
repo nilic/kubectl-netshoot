@@ -52,7 +52,9 @@ Flags:
 
 ## Examples
 
-Each of the following commands will spin up a `netshoot` container with an interactive session and attach to it.
+### Interactive session
+
+Common use-case is to spin up a `netshoot` container with an interactive session and attach to it so you can perform troubleshooting using tools available in `netshoot`.
 
 `run` command is equivalent to `kubectl run --rm` meaning that the pod will be deleted after you exit the session.
 
@@ -77,9 +79,12 @@ kubectl netshoot debug my-existing-pod
 kubectl netshoot debug my-existing-pod --image-tag v0.5
 
 # create a debug session on a node
-# netshoot will run in the host namespaces and have host's filesystem mounted at /host
 kubectl netshoot debug node/my-node
 ```
+
+When running a debug session on a node, `netshoot` will run in the node's network namespace and have node's filesystem mounted at `/host`.
+
+### Running one-time commands
 
 Instead of attaching to the shell, you can also run a one-time command directly on the `netshoot` container. The command you want to run is specified after `--`: 
 
@@ -90,8 +95,6 @@ kubectl netshoot run tmp-shell -- ping 8.8.8.8
 ```
 kubectl netshoot debug mypod -- curl localhost:8443
 ```
-
-For more info on `netshoot` and provided tools please take a look at [nicolaka/netshoot](https://github.com/nicolaka/netshoot) Github repo.
 
 ### Troubleshooting with a custom container
 
