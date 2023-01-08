@@ -1,5 +1,5 @@
 # kubectl netshoot 🌠
-A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for spinning up a [netshoot](https://github.com/nicolaka/netshoot) container. `netshoot` is a network troubleshooting swiss-army container which allows you to perform Kubernetes troubleshooting without installing any new packages in your containers or cluster nodes.
+A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for spinning up a [netshoot](https://github.com/nicolaka/netshoot) container. `netshoot` is a network troubleshooting swiss-army knife container which allows you to perform Kubernetes troubleshooting without installing any new packages in your containers or cluster nodes.
 
 ## Installation
 
@@ -57,37 +57,37 @@ Each of the following commands will spin up a `netshoot` container with an inter
 
 ```
 # spin up a throwaway pod for troubleshooting
-$ kubectl netshoot run tmp-shell
+kubectl netshoot run tmp-shell
 
 # spin up a throwaway pod with a specific netshoot image
-$ kubectl netshoot run tmp-shell --image-tag v0.5
+kubectl netshoot run tmp-shell --image-tag v0.5
 
 # spin up a netshoot pod on the host's network namespace
-$ kubectl netshoot run tmp-shell --host-network
+kubectl netshoot run tmp-shell --host-network
 ```
 
 `debug` command spins up netshoot as an [ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/) in an existing pod or on a node. Ephemeral container terminates after the interactive session is exited.
 
 ```
 # debug using an ephemeral container in an existing pod
-$ kubectl netshoot debug my-existing-pod
+kubectl netshoot debug my-existing-pod
 
 # debug with a specific netshoot image
-$ kubectl netshoot debug my-existing-pod --image-tag v0.5
+kubectl netshoot debug my-existing-pod --image-tag v0.5
 
 # create a debug session on a node
 # netshoot will run in the host namespaces and have host's filesystem mounted at /host
-$ kubectl netshoot debug node/my-node
+kubectl netshoot debug node/my-node
 ```
 
 Instead of attaching to the shell, you can also run a one-time command directly on the `netshoot` container. The command you want to run is specified after `--`: 
 
 ```
-$ kubectl netshoot run tmp-shell -- ping 8.8.8.8
+kubectl netshoot run tmp-shell -- ping 8.8.8.8
 ```
 
 ```
-$ kubectl netshoot debug mypod -- curl localhost:8443
+kubectl netshoot debug mypod -- curl localhost:8443
 ```
 
 For more info on `netshoot` and provided tools please take a look at [nicolaka/netshoot](https://github.com/nicolaka/netshoot) Github repo.
