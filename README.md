@@ -20,7 +20,7 @@ Available Commands:
 
 Flags:
   -h, --help                           help for kubectl-netshoot
-      --host-network                   ("run" command only) spin up netshoot on the host's network namespace
+      --host-network                   ("run" command only) spin up netshoot on the node's network namespace
       --image-name string              netshoot container image to use (default "nicolaka/netshoot")
       --image-tag string               netshoot container image tag to use (default "latest")
 ```
@@ -65,7 +65,7 @@ kubectl netshoot run tmp-shell
 # spin up a throwaway pod with a specific netshoot image
 kubectl netshoot run tmp-shell --image-tag v0.5
 
-# spin up a throwaway pod on the host's network namespace
+# spin up a throwaway pod on the node's network namespace
 kubectl netshoot run tmp-shell --host-network
 ```
 

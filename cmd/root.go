@@ -34,7 +34,7 @@ var (
 
 func init() {
 	rootCmd.PersistentFlags().BoolVar(&hostNetwork,
-		"host-network", false, "(\"run\" command only) spin up netshoot on the host's network namespace")
+		"host-network", false, "(\"run\" command only) spin up netshoot on the node's network namespace")
 	rootCmd.PersistentFlags().StringVar(&imageName,
 		"image-name", "nicolaka/netshoot", "netshoot container image to use")
 	rootCmd.PersistentFlags().StringVar(&imageTag,

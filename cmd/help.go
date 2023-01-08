@@ -51,12 +51,12 @@ Examples:
     kubectl netshoot debug mypod -- curl localhost:8443
 
     # create a debug session on a node
-    # netshoot will run in the host namespaces and have host's filesystem mounted at /host
+    # netshoot will run in the node's network namespace and have node's filesystem mounted at /host
     kubectl netshoot debug node/my-node`
 
 	runFlags = `
 Flags:
-    --host-network                   (applicable to "run" command only) whether to spin up netshoot on the host's network namespace
+    --host-network                   (applicable to "run" command only) whether to spin up netshoot on the node's network namespace
     --image-name string              netshoot container image to use (default "nicolaka/netshoot")
     --image-tag string               netshoot container image tag to use (default "latest")
 -h, --help                           help for run`
@@ -78,7 +78,7 @@ Examples:
     # run a command in netshoot container instead of shell
     kubectl netshoot run tmp-shell -- ping 8.8.8.8
 
-    # spin up a netshoot pod on the host's network namespace
+    # spin up a netshoot pod on the node's network namespace
     kubectl netshoot run tmp-shell --host-network`
 )
 
