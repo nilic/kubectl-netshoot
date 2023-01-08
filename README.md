@@ -80,7 +80,7 @@ $ kubectl netshoot debug my-existing-pod --image-tag v0.5
 $ kubectl netshoot debug node/my-node
 ```
 
-Instead of attaching to the shell, you can also run a command on directly on the `netshoot` container. The command you want to run is specified after `--`: 
+Instead of attaching to the shell, you can also run a one-time command directly on the `netshoot` container. The command you want to run is specified after `--`: 
 
 ```
 $ kubectl netshoot run tmp-shell -- ping 8.8.8.8
