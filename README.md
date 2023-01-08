@@ -62,7 +62,7 @@ kubectl netshoot run tmp-shell
 # spin up a throwaway pod with a specific netshoot image
 kubectl netshoot run tmp-shell --image-tag v0.5
 
-# spin up a netshoot pod on the host's network namespace
+# spin up a throwaway pod on the host's network namespace
 kubectl netshoot run tmp-shell --host-network
 ```
 
