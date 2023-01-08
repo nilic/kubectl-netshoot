@@ -52,7 +52,6 @@ func init() {
 
 	runCmd := run.NewCmdRun(f, ioStreams)
 	runCmd.SetHelpTemplate(runHelp)
-	// fmt.Println(runCmd.UsageTemplate())
 	runCmd.Short = runShort
 	runCmd.Flags().Set("stdin", "true")
 	runCmd.Flags().Set("tty", "true")
