@@ -1,5 +1,5 @@
 # kubectl netshoot 🌠
-A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for spinning up a [netshoot](https://github.com/nicolaka/netshoot) container. `netshoot` is a network troubleshooting swiss-army knife container which allows you to perform Kubernetes troubleshooting without installing any new packages in your containers or cluster nodes.
+A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for spinning up a [netshoot](https://github.com/nicolaka/netshoot) container. `netshoot` is a network troubleshooting Swiss-army knife container which allows you to perform Kubernetes troubleshooting without installing any new packages in your containers or cluster nodes.
 
 ## Installation
 
@@ -21,6 +21,7 @@ Available Commands:
 Flags:
   -h, --help                           help for kubectl-netshoot
       --host-network                   ("run" command only) spin up netshoot on the host's network namespace
+      --image-name string              netshoot container image to use (default "nicolaka/netshoot")
       --image-tag string               netshoot container image tag to use (default "latest")
 ```
 
@@ -91,3 +92,11 @@ kubectl netshoot debug mypod -- curl localhost:8443
 ```
 
 For more info on `netshoot` and provided tools please take a look at [nicolaka/netshoot](https://github.com/nicolaka/netshoot) Github repo.
+
+### Troubleshooting with a custom container
+
+By default, plugin spins up `nicolaka/netshoot:latest` container image, but flags `--image-name` and `--image-tag` allow for running an arbitrary container, eg.
+
+```
+kubectl netshoot run tmp-shell --image-name busybox --image-tag 1.36.0
+```

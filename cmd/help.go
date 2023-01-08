@@ -29,6 +29,7 @@ Global Flags:
 
 	debugFlags = `
 Flags:
+    --image-name string              netshoot container image to use (default "nicolaka/netshoot")
     --image-tag string               netshoot container image tag to use (default "latest")
 -h, --help                           help for debug`
 
@@ -56,6 +57,7 @@ Examples:
 	runFlags = `
 Flags:
     --host-network                   (applicable to "run" command only) whether to spin up netshoot on the host's network namespace
+    --image-name string              netshoot container image to use (default "nicolaka/netshoot")
     --image-tag string               netshoot container image tag to use (default "latest")
 -h, --help                           help for run`
 

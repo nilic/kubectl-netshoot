@@ -14,12 +14,12 @@ import (
 )
 
 const (
-	baseImageName       = "nicolaka/netshoot"
 	hostNetworkOverride = "{\"spec\": {\"hostNetwork\": true}}"
 )
 
 var (
 	hostNetwork bool
+	imageName   string
 	imageTag    string
 
 	rootCmd = &cobra.Command{
@@ -35,6 +35,8 @@ var (
 func init() {
 	rootCmd.PersistentFlags().BoolVar(&hostNetwork,
 		"host-network", false, "(\"run\" command only) spin up netshoot on the host's network namespace")
+	rootCmd.PersistentFlags().StringVar(&imageName,
+		"image-name", "nicolaka/netshoot", "netshoot container image to use")
 	rootCmd.PersistentFlags().StringVar(&imageTag,
 		"image-tag", "latest", "netshoot container image tag to use")
 
@@ -64,7 +66,7 @@ func init() {
 }
 
 func setFlagsForChildCmds(cmd *cobra.Command) {
-	fullImageName := baseImageName + ":" + imageTag
+	fullImageName := imageName + ":" + imageTag
 
 	if cmd.Name() == "run" || cmd.Name() == "debug" {
 		cmd.Flags().Set("image", fullImageName)
