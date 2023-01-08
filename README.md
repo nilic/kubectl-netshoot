@@ -20,7 +20,7 @@ Available Commands:
 
 Flags:
   -h, --help                           help for kubectl-netshoot
-      --host-network                   (applicable to "run" command only) whether to spin up netshoot on the host's network namespace
+      --host-network                   ("run" command only) spin up netshoot on the host's network namespace
       --image-tag string               netshoot container image tag to use (default "latest")
 ```
 
