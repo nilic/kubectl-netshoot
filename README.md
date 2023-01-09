@@ -1,5 +1,5 @@
 # kubectl netshoot 🌠
-A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for spinning up a [netshoot](https://github.com/nicolaka/netshoot) container. `netshoot` is a network troubleshooting Swiss-army knife container which allows you to perform Kubernetes troubleshooting without installing any new packages in your containers or cluster nodes.
+A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/) for easy spin up and access to a [netshoot](https://github.com/nicolaka/netshoot) container - a network troubleshooting Swiss-army knife which allows you to perform Kubernetes troubleshooting without installing any new packages in your containers or cluster nodes.
 
 ## Installation
 
