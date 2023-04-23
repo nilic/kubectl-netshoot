@@ -3,6 +3,20 @@ A [kubectl plugin](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugi
 
 ## Installation
 
+### krew
+
+Using [krew](https://krew.sigs.k8s.io/) kubectl plugin manager:
+
+```
+# add kubectl-netshoot plugin index
+kubectl krew index add netshoot https://github.com/nilic/kubectl-netshoot.git
+
+# install netshoot plugin
+kubectl krew install netshoot/netshoot
+```
+
+### Without krew
+
 Just download the binary for your OS and architecture from the [Releases](https://github.com/nilic/kubectl-netshoot/releases) page and place it in your `PATH`.
 
 ## Usage
