@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"flag"
 	"log"
 	"os"
@@ -13,14 +14,11 @@ import (
 	kcmdutil "k8s.io/kubectl/pkg/cmd/util"
 )
 
-const (
-	hostNetworkOverride = "{\"spec\": {\"hostNetwork\": true}}"
-)
-
 var (
-	hostNetwork bool
-	imageName   string
-	imageTag    string
+	hostNetwork  bool
+	imageName    string
+	imageTag     string
+	nodeSelector map[string]string
 
 	rootCmd = &cobra.Command{
 		Use:   "kubectl-netshoot",
@@ -35,6 +33,8 @@ var (
 func init() {
 	rootCmd.PersistentFlags().BoolVar(&hostNetwork,
 		"host-network", false, "(\"run\" command only) spin up netshoot on the node's network namespace")
+	rootCmd.PersistentFlags().StringToStringVar(&nodeSelector,
+		"node-selector", map[string]string{}, "(\"run\" command only) node labels to use as a node selector for scheduling the netshoot pod (e.g. kubernetes.io/os=linux)")
 	rootCmd.PersistentFlags().StringVar(&imageName,
 		"image-name", "nicolaka/netshoot", "netshoot container image to use")
 	rootCmd.PersistentFlags().StringVar(&imageTag,
@@ -72,8 +72,24 @@ func setFlagsForChildCmds(cmd *cobra.Command) {
 		cmd.Flags().Set("image", fullImageName)
 	}
 
-	if cmd.Name() == "run" && hostNetwork {
-		cmd.Flags().Set("overrides", hostNetworkOverride)
+	if cmd.Name() == "run" && (hostNetwork || len(nodeSelector) > 0) {
+		type specOverride struct {
+			HostNetwork  bool              `json:"hostNetwork,omitempty"`
+			NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+		}
+		type podOverride struct {
+			Spec specOverride `json:"spec"`
+		}
+		override := podOverride{}
+		override.Spec.HostNetwork = hostNetwork
+		if len(nodeSelector) > 0 {
+			override.Spec.NodeSelector = nodeSelector
+		}
+		data, err := json.Marshal(override)
+		if err != nil {
+			log.Fatalf("error building overrides: %v\n", err)
+		}
+		cmd.Flags().Set("overrides", string(data))
 	}
 
 }

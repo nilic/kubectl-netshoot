@@ -59,6 +59,7 @@ Flags:
     --host-network                   (applicable to "run" command only) whether to spin up netshoot on the node's network namespace
     --image-name string              netshoot container image to use (default "nicolaka/netshoot")
     --image-tag string               netshoot container image tag to use (default "latest")
+    --node-selector string           ("run" command only) node labels to use as node selector for scheduling the netshoot pod (e.g. kubernetes.io/os=linux)
 -h, --help                           help for run`
 
 	runShort = "Run a throwaway pod for troubleshooting"
@@ -79,7 +80,10 @@ Examples:
     kubectl netshoot run tmp-shell -- ping 8.8.8.8
 
     # spin up a netshoot pod on the node's network namespace
-    kubectl netshoot run tmp-shell --host-network`
+    kubectl netshoot run tmp-shell --host-network
+
+    # spin up a netshoot pod scheduled on a Linux node (useful on mixed Linux/Windows clusters)
+    kubectl netshoot run tmp-shell --node-selector kubernetes.io/os=linux`
 )
 
 var (
