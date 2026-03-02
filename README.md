@@ -37,7 +37,7 @@ Flags:
       --host-network                   ("run" command only) spin up netshoot on the node's network namespace
       --image-name string              netshoot container image to use (default "nicolaka/netshoot")
       --image-tag string               netshoot container image tag to use (default "latest")
-      --node-selector                  ("run" command only) node labels to use as node selector for scheduling the netshoot pod (default [])
+      --node-selector string           ("run" command only) node labels to use as node selector for scheduling the netshoot pod (e.g. kubernetes.io/os=linux)
 ```
 
 In addition to these flags, the following `kubectl` flags are available for all `kubectl netshoot` commands:

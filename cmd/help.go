@@ -59,7 +59,7 @@ Flags:
     --host-network                   (applicable to "run" command only) whether to spin up netshoot on the node's network namespace
     --image-name string              netshoot container image to use (default "nicolaka/netshoot")
     --image-tag string               netshoot container image tag to use (default "latest")
-    --node-selector                  ("run" command only) node labels to use as node selector for scheduling the netshoot pod (default [])
+    --node-selector string           ("run" command only) node labels to use as node selector for scheduling the netshoot pod (e.g. kubernetes.io/os=linux)
 -h, --help                           help for run`
 
 	runShort = "Run a throwaway pod for troubleshooting"
