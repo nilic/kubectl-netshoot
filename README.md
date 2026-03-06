@@ -37,6 +37,7 @@ Flags:
       --host-network                   ("run" command only) spin up netshoot on the node's network namespace
       --image-name string              netshoot container image to use (default "nicolaka/netshoot")
       --image-tag string               netshoot container image tag to use (default "latest")
+      --node-selector string           ("run" command only) node labels to use as node selector for scheduling the netshoot pod (e.g. kubernetes.io/os=linux)
 ```
 
 In addition to these flags, the following `kubectl` flags are available for all `kubectl netshoot` commands:
@@ -81,6 +82,9 @@ kubectl netshoot run tmp-shell --image-tag v0.5
 
 # spin up a throwaway pod on the node's network namespace
 kubectl netshoot run tmp-shell --host-network
+
+# spin up a netshoot pod scheduled on a Linux node (useful on mixed Linux/Windows clusters)
+kubectl netshoot run tmp-shell --node-selector kubernetes.io/os=linux
 ```
 
 `debug` command spins up netshoot as an [ephemeral container](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/) in an existing pod or on a node. Ephemeral container terminates after the interactive session is exited.
