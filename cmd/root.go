@@ -66,7 +66,7 @@ func init() {
 			return nil, cobra.ShellCompDirectiveError
 		}
 
-		return candidatePodNames, cobra.ShellCompDirectiveDefault
+		return candidatePodNames, cobra.ShellCompDirectiveNoFileComp
 	}
 
 	debugCmd := debug.NewCmdDebug(f, ioStreams)
@@ -83,7 +83,6 @@ func init() {
 	runCmd.Flags().Set("stdin", "true")
 	runCmd.Flags().Set("tty", "true")
 	runCmd.Flags().Set("rm", "true")
-	runCmd.ValidArgsFunction = compFuncPods
 	rootCmd.AddCommand(runCmd)
 
 	kubeConfigFlags.AddFlags(rootCmd.PersistentFlags())
@@ -101,7 +100,7 @@ func init() {
 			return nil, cobra.ShellCompDirectiveError
 		}
 
-		return candidateNamespaces, cobra.ShellCompDirectiveDefault
+		return candidateNamespaces, cobra.ShellCompDirectiveNoFileComp
 	})
 }
 
